@@ -56,7 +56,7 @@ void WriteStringToCell( Reference< XFrame > &rxFrame, OUString aStr )
 
     xCell->setFormula(aStr);
     
-    printf(">>> Wrote \"%s\" to Cell A1\n",
+    printf("DEBUG>>> Wrote \"%s\" to Cell A1\n",
 	OUStringToOString( aStr, RTL_TEXTENCODING_ASCII_US ).getStr()); fflush(stdout);
 }
 
@@ -85,7 +85,7 @@ void WriteCurrTime( Reference< XFrame > &rxFrame )
     char buf[10];
     oslDateTime aDateTime;
     GetCurrDateTime( &aDateTime );
-    sprintf(buf, "%02d:%02d:%02d", aDateTime.Hours, aDateTime.Minutes, aDateTime.Seconds);
+    sprintf(buf, "%02d%02d%02d", aDateTime.Hours, aDateTime.Minutes, aDateTime.Seconds);
     WriteStringToCell( rxFrame, OUString::createFromAscii(buf) );
 }
 
@@ -96,7 +96,7 @@ void SAL_CALL DateTimeWriterDispatchImpl::dispatch( const URL& aURL, const Seque
 {
     if ( aURL.Protocol.equalsAscii("inco.niocs.test.protocolhandler:") )
     {
-	printf(">>> DateTimeWriterDispatchImpl::dispatch() called. this = %p, command = %s\n", this,
+	printf("DEBUG>>> DateTimeWriterDispatchImpl::dispatch() called. this = %p, command = %s\n", this,
 	    OUStringToOString( aURL.Path, RTL_TEXTENCODING_ASCII_US ).getStr()); fflush(stdout);
         if ( aURL.Path.equalsAscii( "InsertDate" ) )
         {
@@ -137,7 +137,7 @@ Reference< XDispatch > SAL_CALL Addon::queryDispatch( const URL& aURL, const ::r
     Reference < XDispatch > xRet;
     if ( aURL.Protocol.equalsAscii("inco.niocs.test.protocolhandler:") )
     {
-	printf(">>> Addon::queryDispatch() called. this = %p, command = %s\n", this,
+	printf("DEBUG>>> Addon::queryDispatch() called. this = %p, command = %s\n", this,
 	    OUStringToOString( aURL.Path, RTL_TEXTENCODING_ASCII_US ).getStr()); fflush(stdout);
         if ( aURL.Path.equalsAscii( "InsertDate" ) )
             xRet = new DateTimeWriterDispatchImpl( mxFrame );

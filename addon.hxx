@@ -36,7 +36,7 @@ public:
     DateTimeWriterDispatchImpl( const ::com::sun::star::uno::Reference< ::com::sun::star::frame::XFrame > &rxFrame )
 	: mxFrame( rxFrame )
     {
-	printf(">>> Created DateTimeWriterDispatchImpl object : %p\n", this); fflush(stdout);
+	printf("DEBUG>>> Created DateTimeWriterDispatchImpl object : %p\n", this); fflush(stdout);
     }
 
     // XDispatch
@@ -64,7 +64,7 @@ public:
     Addon( const ::com::sun::star::uno::Reference< ::com::sun::star::uno::XComponentContext > &rxContext)
         : mxContext( rxContext )
     {
-	printf(">>> Created Addon object : %p\n", this); fflush(stdout);
+	printf("DEBUG>>> Created Addon object : %p\n", this); fflush(stdout);
     }
 
     // XDispatchProvider
